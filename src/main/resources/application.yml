@@ -19,6 +19,10 @@ spring:
     show-sql: true
     open-in-view: false
 
+jwt:
+  secret: R29kd0JhaVByb0NvbU1vbml0b3JpbmdTZWNyZXRLZXlGb3JIV01BQVMzMjE=
+  expiration: 86400000
+
 logging:
   level:
     com.example.user: debug
