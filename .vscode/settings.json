@@ -1,0 +1,14 @@
+{
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "C:\\Program Files\\Microsoft\\jdk-17.0.19.10-hotspot"
+    }
+  ],
+  "java.compile.nullAnalysis.mode": "automatic",
+  "maven.executable.path": "D:\\soft_install\\maven\\maven3.5.4\\bin\\mvn.cmd",
+  "files.encoding": "utf8",
+  "files.eol": "\r\n",
+  "editor.formatOnSave": true,
+  "java.configuration.maven.userSettings": "D:\\soft_install\\maven\\maven3.5.4\\conf\\settings.xml"
+}

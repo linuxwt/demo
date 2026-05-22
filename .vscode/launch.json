@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "UserApplication",
+      "request": "launch",
+      "mainClass": "com.example.user.UserApplication",
+      "projectName": "user-management",
+      "vmArgs": "-Dfile.encoding=UTF-8",
+      "env": {
+        "JAVA_HOME": "C:\\Program Files\\Microsoft\\jdk-17.0.19.10-hotspot"
+      }
+    },
+    {
+      "type": "java",
+      "name": "UserApplication (dev profile)",
+      "request": "launch",
+      "mainClass": "com.example.user.UserApplication",
+      "projectName": "user-management",
+      "vmArgs": "-Dfile.encoding=UTF-8 -Dspring.profiles.active=dev",
+      "env": {
+        "JAVA_HOME": "C:\\Program Files\\Microsoft\\jdk-17.0.19.10-hotspot"
+      }
+    }
+  ]
+}
