@@ -25,6 +25,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
+    private static final int STATUS_ACTIVE = 1;
+    private static final int LOGIN_RESULT_SUCCESS = 1;
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserLoginLogRepository loginLogRepository;
@@ -51,8 +54,7 @@ public class AuthServiceImpl implements AuthService {
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .phone(request.getPhone())
                 .realName(request.getRealName())
-                .status(1)
-                .deleted(false)
+                .status(STATUS_ACTIVE)
                 .build();
 
         user = userRepository.save(user);
@@ -63,14 +65,7 @@ public class AuthServiceImpl implements AuthService {
                 .build();
         user.getRoles().add(userRoleEntity);
 
-        String token = jwtUtil.generateToken(user.getId(), user.getUsername());
-
-        return AuthResponse.builder()
-                .token(token)
-                .userId(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .build();
+        return buildAuthResponse(user);
     }
 
     @Override
@@ -86,7 +81,7 @@ public class AuthServiceImpl implements AuthService {
             throw new BusinessException("invalid username or password");
         }
 
-        if (user.getStatus() != 1) {
+        if (user.getStatus() != STATUS_ACTIVE) {
             throw new BusinessException("account has been disabled");
         }
 
@@ -94,12 +89,15 @@ public class AuthServiceImpl implements AuthService {
 
         UserLoginLog loginLog = UserLoginLog.builder()
                 .user(user)
-                .loginResult(1)
+                .loginResult(LOGIN_RESULT_SUCCESS)
                 .build();
         loginLogRepository.save(loginLog);
 
-        String token = jwtUtil.generateToken(user.getId(), user.getUsername());
+        return buildAuthResponse(user);
+    }
 
+    private AuthResponse buildAuthResponse(User user) {
+        String token = jwtUtil.generateToken(user.getId(), user.getUsername());
         return AuthResponse.builder()
                 .token(token)
                 .userId(user.getId())

@@ -54,7 +54,7 @@ public class User extends AuditableEntity {
     private LocalDateTime lastLoginAt;
 
     @Column(name = "deleted", nullable = false)
-    private Boolean deleted;
+    private boolean deleted;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
